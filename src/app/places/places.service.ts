@@ -25,8 +25,9 @@ export class PlacesService {
       );
   }
 
-  addPlaceToUserPlaces(placeId: string) {
-    return this.httpClient.put('http://localhost:3000/user-places', { placeId });
+  addPlaceToUserPlaces(place: Place) {
+    this.userPlaces.update(prevPlaces => [...prevPlaces, place]);
+    return this.httpClient.put('http://localhost:3000/user-places', { placeId: place.id });
   }
 
   removeUserPlace(place: Place) { }
